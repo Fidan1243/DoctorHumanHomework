@@ -121,7 +121,7 @@ namespace ConsoleApp8
                     }
                 }
             }
-            else if (Convert.ToInt32(ch) == 3 && doctor.MorningTimeHuman == null)
+            else if (Convert.ToInt32(ch) == 3)
             {
                 Console.Clear();
                 if (doctor.NightTime == false && !File.Exists($"Dr {doctor.Name}'s night time.txt"))

@@ -1,5 +1,6 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -61,40 +62,96 @@ namespace ConsoleApp8
             if (Convert.ToInt32(ch) == 1)
             {
                 Console.Clear();
-                if (doctor.MorningTime == false && doctor.MorningTimeHuman == null)
+                if (doctor.MorningTime == false && !File.Exists($"Dr {doctor.Name}'s morning time.txt"))
                 {
                     doctor.MorningTime = true;
-                    doctor.MorningTimeHuman = $"{name} was reserved Morning time of {doctor.Name}";
+                    using (FileStream fs = new FileStream($"Dr {doctor.Name}'s morning time.txt", FileMode.OpenOrCreate))
+                    {
+                        using (StreamWriter sw = new StreamWriter(fs, Encoding.ASCII))
+                        {
+                            sw.Write($"Morning Time reserved by {name}");
+                        }
+                    }
+
+
                 }
                 else
                 {
-                    throw new Exception(doctor.MorningTimeHuman);
+                    using (var fs = new FileStream($"Dr {doctor.Name}'s morning time.txt", FileMode.OpenOrCreate))
+                    {
+                        using (var sr = new StreamReader(fs, Encoding.ASCII))
+                        {
+
+                            var text = sr.ReadLine();
+                            Console.WriteLine(text);
+                            text = sr.ReadLine();
+
+                            throw new Exception(text);
+                        }
+                    }
                 }
             }
             else if (Convert.ToInt32(ch) == 2)
             {
                 Console.Clear();
-                if (doctor.NoonTime == false && doctor.MorningTimeHuman == null)
+                if (doctor.NoonTime == false && !File.Exists($"Dr {doctor.Name}'s noon time.txt"))
                 {
                     doctor.NoonTime = true;
-                    doctor.NoonTimeHuman = $"{name} was reserved Noon time of {doctor.Name}";
+                    using (FileStream fs = new FileStream($"Dr {doctor.Name}'s noon time.txt", FileMode.OpenOrCreate))
+                    {
+                        using (StreamWriter sw = new StreamWriter(fs, Encoding.ASCII))
+                        {
+                            sw.Write($"Noon Time reserved by {name}");
+                        }
+                    }
                 }
                 else
                 {
-                    throw new Exception(doctor.NoonTimeHuman);
+                    using (var fs = new FileStream($"Dr {doctor.Name}'s noon time.txt", FileMode.OpenOrCreate))
+                    {
+                        using (var sr = new StreamReader(fs, Encoding.ASCII))
+                        {
+
+                            var text = sr.ReadLine();
+                            Console.WriteLine(text);
+                            text = sr.ReadLine();
+
+                            throw new Exception(text);
+                        }
+                    }
                 }
             }
             else if (Convert.ToInt32(ch) == 3 && doctor.MorningTimeHuman == null)
             {
                 Console.Clear();
-                if (doctor.NightTime == false)
+                if (doctor.NightTime == false && !File.Exists($"Dr {doctor.Name}'s night time.txt"))
                 {
                     doctor.NightTime = true;
-                    doctor.EveningTimeHuman = $"{name} was reserved Evening time of {doctor.Name}";
+                    using (FileStream fs = new FileStream($"Dr {doctor.Name}'s night time.txt", FileMode.OpenOrCreate))
+                    {
+                        using (StreamWriter sw = new StreamWriter(fs, Encoding.ASCII))
+                        {
+                            sw.Write($"Night Time reserved by {name}");
+                        }
+                    }
                 }
                 else
                 {
-                    throw new Exception(doctor.EveningTimeHuman);
+                    using (FileStream fs = new FileStream($"Dr {doctor.Name}'s night time.txt", FileMode.OpenOrCreate))
+                    {
+                        using (StreamWriter sw = new StreamWriter(fs, Encoding.ASCII))
+                        {
+                            using (var sr = new StreamReader(fs, Encoding.ASCII))
+                            {
+
+                                var text = sr.ReadLine();
+                                Console.WriteLine(text);
+                                text = sr.ReadLine();
+
+                                throw new Exception(text);
+                            }
+                        }
+                    }
                 }
             }
         }
